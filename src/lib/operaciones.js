@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+exports.div = exports.mult = exports.rest = exports.sumar = void 0;
+var sumar = function (a, b) { return a + b; };
+exports.sumar = sumar;
+var rest = function (a, b) { return a - b; };
+exports.rest = rest;
+var mult = function (a, b) { return a * b; };
+exports.mult = mult;
+var div = function (a, b) { return a / b; };
+exports.div = div;

@@ -1,0 +1,10 @@
+"use strict";
+exports.__esModule = true;
+var operaciones = require("./lib/operaciones");
+var mensaje = "Hola Typescript";
+console.log(mensaje);
+var num1 = 10, num2 = 4;
+console.log("La suma de " + num1 + " m\u00E1s " + num2 + " es " + operaciones.sumar(num1, num2));
+console.log("La resta de " + num1 + " menos " + num2 + " es " + operaciones.rest(num1, num2));
+console.log("La multiplicaci\u00F3n de " + num1 + " por " + num2 + " es " + operaciones.mult(num1, num2));
+console.log("La divisi\u00F3n de " + num1 + " dividido " + num2 + " es " + operaciones.div(num1, num2));

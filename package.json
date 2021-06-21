@@ -1,0 +1,23 @@
+{
+  "name": "entregable-clase14",
+  "version": "1.0.0",
+  "description": "Entregable-Clase14-Server-con-Typescript",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmzulian/Entregable-Clase14.git"
+  },
+  "author": "Pablo ZULIAN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pmzulian/Entregable-Clase14/issues"
+  },
+  "homepage": "https://github.com/pmzulian/Entregable-Clase14#readme",
+  "dependencies": {
+    "typescript": "^4.3.4"
+  }
+}
