@@ -1,0 +1,24 @@
+{
+  "name": "entregable-clase14",
+  "version": "1.0.0",
+  "description": "Entregabla Clase 14 - Server con TSC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmzulian/Entregable-Clase14.git"
+  },
+  "author": "Pablo ZULIAN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pmzulian/Entregable-Clase14/issues"
+  },
+  "homepage": "https://github.com/pmzulian/Entregable-Clase14#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "typescript": "^4.3.4"
+  }
+}
