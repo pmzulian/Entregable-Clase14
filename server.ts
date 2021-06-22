@@ -51,11 +51,11 @@ app.get("/api/productos/listar/:id", (req, res) => {
 //Creamos la estructura con express.router
 
 router.put("/productos/actualizar/:id", (req, res) => {
-  const ubicacion:String = req.params.id;
+  const ubicacion:any = req.params.id;
   const actualizar:any = req.body;
 
   if (ubicacion <= nuevosProductos.productos.length) {
-    nuevosProductos.productos = nuevosProductos.productos.map((p) => {
+    nuevosProductos.productos = nuevosProductos.productos.map((p: { id: any; }) => {
       if (p.id == ubicacion) {
         p = Object.assign(p, actualizar);
       }
