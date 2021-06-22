@@ -7,7 +7,8 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ServerES6toJS5": "node_modules/.bin/babel ./server.es6.js -o  ./server.js -w"
+    "ServerTStoJS5": "node_modules/.bin/tsc ./server.js -w",
+    "build": ".\\node_modules\\.bin\\tsc"
   },
   "repository": {
     "type": "git",
