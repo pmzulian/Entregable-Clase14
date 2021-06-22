@@ -4,7 +4,9 @@
   "description": "Entregabla Clase 14 - Server con TSC",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ServerES6toJS5": "node_modules/.bin/babel ./server.es6.js -o  ./server.js -w"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,14 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
     "typescript": "^4.3.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-destructuring": "^7.14.7",
+    "@babel/preset-env": "^7.14.7"
   }
 }

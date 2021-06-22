@@ -1,117 +1,110 @@
+"use strict";
+
+require("core-js/modules/es6.symbol.js");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 const express = require("express");
+
 const crearProd = require("./productos.js");
+
 const handlebars = require("express-handlebars");
 
 const app = express();
-
 const puerto = 8080;
-
 const router = express.Router();
-
 app.use("/api", router);
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app
-  .listen(puerto, () =>
-    console.log(`Escuchando peticiones puerto localhost:${puerto}`)
-  )
-  .on("error", (error) => console.log(`Error en servidor ${error}`));
-
+app.use(express.urlencoded({
+  extended: true
+}));
+app.listen(puerto, () => console.log("Escuchando peticiones puerto localhost:".concat(puerto))).on("error", error => console.log("Error en servidor ".concat(error)));
 const nuevosProductos = new crearProd();
-
 app.post("/api/productos/guardar", (req, res) => {
-  nuevosProductos.guardar({
-    ...req.body,
-    id: nuevosProductos.getId(),
-  });
+  nuevosProductos.guardar(_objectSpread(_objectSpread({}, req.body), {}, {
+    id: nuevosProductos.getId()
+  }));
   res.send(req.body);
 });
-
 app.get("/api/productos/listar", (req, res) => {
   const todos = nuevosProductos.listarTodos();
+
   if (todos.length > 0) {
     res.send(todos);
   } else {
-    res.json({ error: "No hay productos cargados" });
+    res.json({
+      error: "No hay productos cargados"
+    });
   }
 });
-
 app.get("/api/productos/listar/:id", (req, res) => {
   let found = nuevosProductos.listarIndividual(req.params.id);
   console.log(found);
+
   if (found) {
     res.send(found);
   } else {
-    res.json({ error: "No hay producto con el id indicado" });
+    res.json({
+      error: "No hay producto con el id indicado"
+    });
   }
-});
-
-//Creamos la estructura con express.router
+}); //Creamos la estructura con express.router
 
 router.put("/productos/actualizar/:id", (req, res) => {
   const ubicacion = req.params.id;
   const actualizar = req.body;
 
   if (ubicacion <= nuevosProductos.productos.length) {
-    nuevosProductos.productos = nuevosProductos.productos.map((p) => {
+    nuevosProductos.productos = nuevosProductos.productos.map(p => {
       if (p.id == ubicacion) {
         p = Object.assign(p, actualizar);
       }
+
       return p;
     });
-    res.json({
-      ...nuevosProductos.productos,
-    });
+    res.json(_objectSpread({}, nuevosProductos.productos));
   } else {
     res.send("No hay producto con el índice " + ubicacion);
   }
 });
-
 router.delete("/productos/borrar/:id", (req, res) => {
   let id = req.params.id;
-
-  let productoBuscado = nuevosProductos.productos.find((p) => {
+  let productoBuscado = nuevosProductos.productos.find(p => {
     return p.id == id;
   });
 
   if (productoBuscado) {
     let borrado = nuevosProductos.borrar(id);
-
     res.send(borrado);
   } else {
     res.send("No exite el produco");
   }
-});
-
-// app.use("/formulario", express.static("public"));
-
+}); // app.use("/formulario", express.static("public"));
 //Configuramos handlebars
-app.engine(
-  "hbs",
-  handlebars({
-    extname: ".hbs",
-    defaultLayout: "index.hbs",
-    layoutsDir: "./views/layouts",
-    partialsDir: "./views/partials/",
-  })
-);
 
-//Establecemos el motor de plantillas a utilizar
-app.set("view engine", "hbs");
+app.engine("hbs", handlebars({
+  extname: ".hbs",
+  defaultLayout: "index.hbs",
+  layoutsDir: "./views/layouts",
+  partialsDir: "./views/partials/"
+})); //Establecemos el motor de plantillas a utilizar
 
-//Establecemos el directorio donde se encuentran las plantillas
-app.set("views", "./views");
+app.set("view engine", "hbs"); //Establecemos el directorio donde se encuentran las plantillas
 
-//Espacio público del servidor
-app.use(express.static(__dirname + "/public"));
+app.set("views", "./views"); //Espacio público del servidor
 
-//Servimos el cuerpo de la página main.hbs en el contenedor index.hbs
+app.use(express.static(__dirname + "/public")); //Servimos el cuerpo de la página main.hbs en el contenedor index.hbs
+
 app.get("/productos/vista", (req, res) => {
-    const todos = nuevosProductos.listarTodos();
-    res.render("main", {sugeridosProd: todos, listadoExiste: todos.length})
-})
+  const todos = nuevosProductos.listarTodos();
+  res.render("main", {
+    sugeridosProd: todos,
+    listadoExiste: todos.length
+  });
+}); //Servimos el formulario de ingreso de datos
 
-//Servimos el formulario de ingreso de datos
 app.use("/formulario", express.static("public"));
