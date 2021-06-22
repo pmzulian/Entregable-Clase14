@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "Entregabla Clase 14 - Server con TSC",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ServerTStoJS5": "node_modules/.bin/tsc ./server.js -w",
-    "build": ".\\node_modules\\.bin\\tsc"
+    "ServerTStoJS5": "node_modules\\.bin\\tsc"
   },
   "repository": {
     "type": "git",

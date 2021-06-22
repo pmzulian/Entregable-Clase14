@@ -1,5 +1,5 @@
 import express from "express";
-import crearProd from "./productos.js";
+import GenerarProductos from "./productos";
 import handlebars from "express-handlebars";
 
 const app = express();
@@ -19,7 +19,7 @@ app
   )
   .on("error", (error) => console.log(`Error en servidor ${error}`));
 
-const nuevosProductos:any = new crearProd();
+const nuevosProductos:any = new GenerarProductos();
 
 app.post("/api/productos/guardar", (req, res) => {
   nuevosProductos.guardar({
